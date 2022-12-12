@@ -11,6 +11,13 @@ public class Item {
 
     }
 
+    public Item(int id, int playerId, int count, int level) {
+        this.id = id;
+        this.playerId = playerId;
+        this.count = count;
+        this.level = level;
+    }
+
     public Item(int id, int playerId, int resourceId, int count, int level) {
         this.id = id;
         this.playerId = playerId;

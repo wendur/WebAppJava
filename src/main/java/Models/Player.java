@@ -11,7 +11,11 @@ public class Player {
     private List<Item> items = new ArrayList<>();
 
     public Player() {
+    }
 
+    public Player(int playerId, String nickname) {
+        this.playerId = playerId;
+        this.nickname = nickname;
     }
 
     public void setPlayerId(int playerId) {

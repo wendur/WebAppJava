@@ -16,7 +16,7 @@ public class ConsoleUpdateService {
         System.out.print("Enter entity name (player, progress, currency, item) - ");
         String entity = scanner.nextLine();
 
-        Entity.value(entity).update(playerService);
+        Entity.value(entity).instance().update(playerService);
     }
 
     public void updatePlayer(PlayerService playerService) {

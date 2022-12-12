@@ -16,7 +16,7 @@ public class ConsoleCreateService {
         System.out.print("Enter entity name (player, progress, currency, item) - ");
         String entity = scanner.nextLine();
 
-        Entity.value(entity).create(playerService,true, -1);
+        Entity.value(entity).instance().create(playerService,true, -1);
     }
 
     public void createPlayer(PlayerService playerService, boolean flag) {

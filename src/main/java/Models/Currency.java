@@ -11,6 +11,13 @@ public class Currency {
 
     }
 
+    public Currency(int id, int playerId, String name, int count) {
+        this.id = id;
+        this.playerId = playerId;
+        this.name = name;
+        this.count = count;
+    }
+
     public Currency(int id, int playerId, int resourceId, String name, int count) {
         this.id = id;
         this.playerId = playerId;

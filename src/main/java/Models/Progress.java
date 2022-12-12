@@ -11,6 +11,13 @@ public class Progress {
 
     }
 
+    public Progress(int id, int playerId, int score, int maxScore) {
+        this.id = id;
+        this.playerId = playerId;
+        this.score = score;
+        this.maxScore = maxScore;
+    }
+
     public Progress(int id, int playerId, int resourceId, int score, int maxScore) {
         this.id = id;
         this.playerId = playerId;

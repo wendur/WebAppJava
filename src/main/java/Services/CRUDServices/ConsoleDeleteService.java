@@ -22,7 +22,7 @@ public class ConsoleDeleteService {
             scanner.nextLine();
         }
 
-        Entity.value(table).delete(playerId, id, playerService);
+        Entity.value(table).instance().delete(playerId, id, playerService);
         //playerService.delete(table, playerId, id);
     }
 }

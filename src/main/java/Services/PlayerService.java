@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerService {
@@ -27,9 +26,42 @@ public class PlayerService {
         }
     }
 
-    public void printPlayer(int id) {
+    public String printPlayer(int id) {
         try {
-            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(players.get(findIndex(id))));
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(players.get(findIndex(id)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String printProgress(int playerId, int id) {
+        try {
+            return mapper
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(players.get(findIndex(playerId))
+                                                .getProgresses().get(findIndexProgress(id)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String printCurrency(int playerId, int id) {
+        try {
+            return mapper
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(players.get(findIndex(playerId))
+                            .getCurrencies().get(findIndexCurrency(id)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String printItem(int playerId, int id) {
+        try {
+            return mapper
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(players.get(findIndex(playerId))
+                            .getItems().get(findIndexItem(id)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -78,23 +110,23 @@ public class PlayerService {
         return -1;
     }
 
-    public void delete(String table, int playerId, int id) {
-        int index = findIndex(playerId);
-        if (index == -1) {
-            System.out.println("Player with this ID does not exist!!!");
-            return;
-        }
-
-        //проверка на существование ???
-
-        //Entity.value(table).delete(index, id, players);
-
-        if (table.equals("player")) {
-            databaseService.delete(table, playerId);
-        } else {
-            databaseService.delete(table, id);
-        }
-    }
+//    public void delete(String table, int playerId, int id) {
+//        int index = findIndex(playerId);
+//        if (index == -1) {
+//            System.out.println("Player with this ID does not exist!!!");
+//            return;
+//        }
+//
+//        //проверка на существование ???
+//
+//        //Entity.value(table).delete(index, id, players);
+//
+//        if (table.equals("player")) {
+//            databaseService.delete(table, playerId);
+//        } else {
+//            databaseService.delete(table, id);
+//        }
+//    }
 
     public void deletePlayer(int playerId) {
         int index = findIndex(playerId);
@@ -151,7 +183,7 @@ public class PlayerService {
             return;
         }
 
-        players.add(onlyPlayer(player)); // убрать сущности
+        players.add(onlyPlayer(player));
 
         databaseService.insert("players", "(id, nickname)", "(" + player.getPlayerId() + ", '"
                 + player.getNickname() + "')");
@@ -240,8 +272,8 @@ public class PlayerService {
     }
 
     public void updatePlayer(Player player) {
-        int index = player.getPlayerId();
-        if (findIndex(index) == -1) {
+        int index = findIndex(player.getPlayerId());
+        if (index == -1) {
             System.out.println("Player with this ID does not exist!!!");
             return;
         }
@@ -251,8 +283,8 @@ public class PlayerService {
     }
 
     public void updateProgress(Progress progress) {
-        int index = progress.getPlayerId();
-        if (findIndex(index) == -1) {
+        int index = findIndex(progress.getPlayerId());
+        if (index == -1) {
             System.out.println("Player with this ID does not exist!!!");
             return;
         }
@@ -270,8 +302,8 @@ public class PlayerService {
     }
 
     public void updateCurrency(Currency currency) {
-        int index = currency.getPlayerId();
-        if (findIndex(index) == -1) {
+        int index = findIndex(currency.getPlayerId());
+        if (index == -1) {
             System.out.println("Player with this ID does not exist!!!");
             return;
         }
@@ -289,8 +321,8 @@ public class PlayerService {
     }
 
     public void updateItem(Item item) {
-        int index = item.getPlayerId();
-        if (findIndex(index) == -1) {
+        int index = findIndex(item.getPlayerId());
+        if (index == -1) {
             System.out.println("Player with this ID does not exist!!!");
             return;
         }
